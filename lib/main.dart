@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smdc/scr/config/router/app_router.gr.dart';
 import 'package:smdc/scr/config/themes/app_themes.dart';
 import 'package:smdc/scr/locator.dart';
-import 'package:smdc/scr/presentation/signIn/sign_in_bloc.dart';
+import 'package:smdc/scr/presentation/autorization/signIn/sign_in_bloc.dart';
 
 Client client = Client();
 
@@ -13,18 +13,17 @@ void main() async {
   await initializeDependencies();
   runApp(BlocProvider(
     create: (context) => SignInBloc(),
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Smdc',
       theme: AppTheme.light,
       routerDelegate: locator<AppRouter>().delegate(),
       routeInformationParser: locator<AppRouter>().defaultRouteParser(),

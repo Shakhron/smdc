@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smdc/scr/config/router/app_router.gr.dart';
 import 'package:smdc/scr/locator.dart';
-import 'package:smdc/scr/presentation/signIn/sign_in_bloc.dart';
-import 'package:smdc/scr/presentation/mainPage.dart';
+import 'package:smdc/scr/presentation/autorization/signIn/sign_in_bloc.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({super.key});
@@ -13,7 +12,6 @@ class SignInPage extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final passwordKey = GlobalKey<FormState>();
   final emailKey = GlobalKey<FormState>();
-  final AppRouter router = AppRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class SignInPage extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
           if (state is SighnInSuccessful) {
-            locator<AppRouter>().push(MainRouteWidget());
+            locator<AppRouter>().push(MainRoute());
           }
         },
         builder: (context, state) {
