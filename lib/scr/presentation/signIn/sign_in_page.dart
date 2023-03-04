@@ -1,22 +1,36 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smdc/scr/presentation/bloc/bloc/sign_in_bloc.dart';
+import 'package:smdc/scr/config/router/app_router.gr.dart';
+import 'package:smdc/scr/locator.dart';
+import 'package:smdc/scr/presentation/signIn/sign_in_bloc.dart';
+import 'package:smdc/scr/presentation/mainPage.dart';
 
-class AutorizationWidget extends StatelessWidget {
-  AutorizationWidget({super.key});
+class SignInPage extends StatelessWidget {
+  SignInPage({super.key});
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final passwordKey = GlobalKey<FormState>();
   final emailKey = GlobalKey<FormState>();
+  final AppRouter router = AppRouter();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<SignInBloc, SignInState>(
+      body: BlocConsumer<SignInBloc, SignInState>(
+        listener: (context, state) {
+          if (state is SignInFailure) {
+            final SnackBar snackBar = SnackBar(content: Text(state.error));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
+          if (state is SighnInSuccessful) {
+            locator<AppRouter>().push(MainRouteWidget());
+          }
+        },
         builder: (context, state) {
           if (state is IsLoading) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +81,7 @@ class AutorizationWidget extends StatelessWidget {
                     },
                   ),
                 ),
-              )
+              ),
             ],
           );
         },

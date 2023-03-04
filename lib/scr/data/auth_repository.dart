@@ -6,14 +6,10 @@ class AuthRepository implements IAuthRepository {
   final Account _account = locator<Account>();
   @override
   Future signIn({required String email, required String password}) async {
-    print('1');
     try {
-      final session = await _account.createEmailSession(
-          email: 'team@appwrite.io', password: 'password');
-
-      print(session);
+      final session =
+          await _account.createEmailSession(email: email, password: password);
     } catch (e) {
-      print(2);
       rethrow;
     }
   }
