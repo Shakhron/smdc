@@ -3,4 +3,13 @@ abstract class IAuthRepository {
     required String email,
     required String password,
   });
+
+  Future signUp({
+    required email,
+    required password,
+  });
+
+  Future logOut();
+
+  Future getAccount();
 }
