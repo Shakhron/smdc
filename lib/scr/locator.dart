@@ -1,5 +1,7 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:get_it/get_it.dart';
+import 'package:smdc/scr/config/router/app_router.gr.dart';
 import 'package:smdc/scr/data/auth_repository.dart';
 import 'package:smdc/scr/utils/constants/strings.dart';
 
@@ -17,4 +19,6 @@ Future<void> initializeDependencies() async {
   locator.registerSingleton(Account(locator<Client>()));
 
   locator.registerSingleton(AuthRepository());
+
+  locator.registerSingleton(AppRouter());
 }
