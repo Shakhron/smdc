@@ -46,9 +46,11 @@ class AppRouter extends _i5.RootStackRouter {
       );
     },
     SignUpRoute.name: (routeData) {
+      final args = routeData.argsAs<SignUpRouteArgs>(
+          orElse: () => const SignUpRouteArgs());
       return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i4.SignUpPage(),
+        child: _i4.SignUpPage(key: args.key),
       );
     },
   };
@@ -124,12 +126,24 @@ class AutorizationRoute extends _i5.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.SignUpPage]
-class SignUpRoute extends _i5.PageRouteInfo<void> {
-  const SignUpRoute()
+class SignUpRoute extends _i5.PageRouteInfo<SignUpRouteArgs> {
+  SignUpRoute({_i6.Key? key})
       : super(
           SignUpRoute.name,
           path: '/sign-up-page',
+          args: SignUpRouteArgs(key: key),
         );
 
   static const String name = 'SignUpRoute';
+}
+
+class SignUpRouteArgs {
+  const SignUpRouteArgs({this.key});
+
+  final _i6.Key? key;
+
+  @override
+  String toString() {
+    return 'SignUpRouteArgs{key: $key}';
+  }
 }
